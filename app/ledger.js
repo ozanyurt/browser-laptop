@@ -444,7 +444,7 @@ eventStore.addChangeListener(() => {
 
     publisher = page.publisher
     pattern = `https?://${publisher}`
-    if ((!synopsis.publishers[publisher]) && (getSetting(settings.EXCLUDE_BY_DEFAULT))) {
+    if ((!synopsis.publishers[publisher]) && (!getSetting(settings.AUTO_SUGGEST_SITES))) {
       appActions.changeSiteSetting(pattern, 'ledgerPayments', false)
     }
     synopsis.initPublisher(publisher)

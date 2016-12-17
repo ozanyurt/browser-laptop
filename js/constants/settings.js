@@ -63,7 +63,7 @@ const settings = {
   MINIMUM_VISIT_TIME: 'advanced.minimum-visit-time',
   MINIMUM_VISITS: 'advanced.minimum-visits',
   MINIMUM_PERCENTAGE: 'advanced.minimum-percentage',
-  EXCLUDE_BY_DEFAULT: 'advanced.exclude-by-default',
+  AUTO_SUGGEST_SITES: 'advanced.auto-suggest-sites',
 
   // DEPRECATED settings
   // ########################

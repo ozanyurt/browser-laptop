@@ -84,7 +84,8 @@ const appConstants = {
   APP_ALLOW_FLASH_ALWAYS: _,
   APP_FLASH_PERMISSION_REQUESTED: _,
   APP_SHUTTING_DOWN: _,
-  APP_CLIPBOARD_TEXT_UPDATED: _
+  APP_CLIPBOARD_TEXT_UPDATED: _,
+  APP_SAVE_SYNC_INIT_DATA: _
 }
 
 module.exports = mapValuesByKeys(appConstants)

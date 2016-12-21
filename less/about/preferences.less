@@ -986,6 +986,12 @@ table.sortableTable {
     }
   }
 
+  .advancedSettingsWrapper {
+    display: flex;
+    justify-content: flex-end;
+    padding-bottom: 15px;
+  }
+
   // This defines the styling of the title row (1st) on about:preferences#payments
   .titleBar {
     overflow: hidden;
@@ -995,7 +1001,7 @@ table.sortableTable {
     .paymentsSwitches {
       display: flex;
 
-      .enablePaymentsSwitch {
+      .enablePaymentsSwitch, .autoSuggestSwitch {
         display: flex;
         align-items: center;
         width: @walletBarTableData;
@@ -1003,6 +1009,11 @@ table.sortableTable {
         span {
           font-weight: bold;
           color: @gray;
+
+          &.moreInfoBtn {
+            // color: @gray;
+            margin-left: 7px;
+          }
         }
 
         label {
@@ -1010,6 +1021,11 @@ table.sortableTable {
           color: @braveOrange;
         }
       }
+    }
+
+    .autoSuggestSwitch {
+      margin-right: 25px;
+      width: 220px;
     }
 
     .advancedSettings {

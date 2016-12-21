@@ -22,6 +22,7 @@ const getSetting = require('../settings').getSetting
 const windowStore = require('../stores/windowStore')
 const contextMenus = require('../contextMenus')
 const LongPressButton = require('./longPressButton')
+const appActions = require('../actions/appActions')
 
 class NavigationBar extends ImmutableComponent {
   constructor () {
@@ -31,6 +32,9 @@ class NavigationBar extends ImmutableComponent {
     this.onReload = this.onReload.bind(this)
     this.onReloadLongPress = this.onReloadLongPress.bind(this)
     this.onNoScript = this.onNoScript.bind(this)
+    this.onAuthorizePublisher = this.onAuthorizePublisher.bind(this)
+    // todo @cezaraugusto add hostPattern param
+    // this.onAuthorizePublisher = this.onAuthorizePublisher.bind(this, this.getHostPattern(synopsis))
   }
 
   get activeFrame () {
@@ -119,6 +123,18 @@ class NavigationBar extends ImmutableComponent {
     windowActions.setNoScriptVisible(!this.props.noScriptIsVisible)
   }
 
+  onAuthorizePublisher (hostPattern) {
+    // if payments disabled, enable it
+    if (!getSetting(settings.AUTO_SUGGEST_SITES)) {
+      appActions.changeSetting(settings.PAYMENTS_ENABLED, true)
+    }
+
+    // todo @cezaraugusto
+    // need to know if hostPattern is enabled on payments
+    // if not, add and enable.
+    // else, disable
+  }
+
   componentDidUpdate (prevProps) {
     if (this.props.noScriptIsVisible && !this.showNoScriptInfo) {
       // There are no blocked scripts, so hide the noscript dialog.
@@ -130,6 +146,10 @@ class NavigationBar extends ImmutableComponent {
     if (this.props.activeFrameKey === undefined) {
       return null
     }
+    const showAddPublisherButton = getSetting(settings.AUTO_SUGGEST_SITES) === false && getSetting(settings.HIDE_EXCLUDED_SITES) === false
+
+    // TODO @cezaraugusto check if publisher is authorized so we can change color
+    const isPublisherAllowed = true
 
     return <div id='navigator'
       ref='navigator'
@@ -207,6 +227,7 @@ class NavigationBar extends ImmutableComponent {
         urlbar={this.props.navbar.get('urlbar')}
         onStop={this.onStop}
         menubarVisible={this.props.menubarVisible}
+        noBorderRadius={showAddPublisherButton}
         />
       {
         isSourceAboutUrl(this.props.location)
@@ -214,6 +235,18 @@ class NavigationBar extends ImmutableComponent {
           <span className='browserButton' />
         </div>
         : <div className='endButtons'>
+          {
+            showAddPublisherButton
+            ? <span className={cx({
+                addPublisherButtonContainer: true,
+                authorizedPublisher: isPublisherAllowed
+              })}>
+              <Button iconClass='fa-btc'
+                l10nId='enablePublisher'
+                onClick={this.onAuthorizePublisher} />
+            </span>
+            : null
+          }
           {
             !this.showNoScriptInfo
             ? null

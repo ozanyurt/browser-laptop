@@ -1077,11 +1077,6 @@ class PaymentsTab extends ImmutableComponent {
           {this.enabled
             ? <SettingsList>
               <SettingCheckbox
-                dataL10nId='autoSuggestSites'
-                prefKey={settings.AUTO_SUGGEST_SITES}
-                settings={this.props.settings}
-                onChangeSetting={this.props.onChangeSetting} />
-              <SettingCheckbox
                 dataL10nId='minimumPercentage'
                 prefKey={settings.MINIMUM_PERCENTAGE}
                 settings={this.props.settings}
@@ -1328,15 +1323,15 @@ class PaymentsTab extends ImmutableComponent {
         ? <ModalOverlay title={'ledgerRecoveryTitle'} content={this.ledgerRecoveryContent} footer={this.ledgerRecoveryFooter} onHide={this.props.hideOverlay.bind(this, 'ledgerRecovery')} />
         : null
       }
-      <div className="advancedSettingsWrapper">
-      {
-        this.props.ledgerData.get('created') && this.enabled
-        ? <Button
+      <div className='advancedSettingsWrapper'>
+        {
+          this.props.ledgerData.get('created') && this.enabled
+          ? <Button
             l10nId='advancedSettings'
             className='advancedSettings whiteButton inlineButton wideButton'
             onClick={this.props.showOverlay.bind(this, 'advancedSettings')} />
-        : null
-      }
+          : null
+        }
       </div>
       <div className='titleBar'>
         <div className='sectionTitleWrapper pull-left'>

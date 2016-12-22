@@ -238,9 +238,9 @@ class NavigationBar extends ImmutableComponent {
           {
             showAddPublisherButton
             ? <span className={cx({
-                addPublisherButtonContainer: true,
-                authorizedPublisher: isPublisherAllowed
-              })}>
+              addPublisherButtonContainer: true,
+              authorizedPublisher: isPublisherAllowed
+            })}>
               <Button iconClass='fa-btc'
                 l10nId='enablePublisher'
                 onClick={this.onAuthorizePublisher} />
